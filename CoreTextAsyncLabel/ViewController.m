@@ -7,9 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "NormalTableViewCell.h"
+#import "CoreTextTableViewCell.h"
 #import "CTLabel.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -17,16 +20,25 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	CTLabel *label = [[CTLabel alloc] initWithFrame:CGRectMake(100, 100, 100, 50)];
-	label.text = @"Hello Core Text";
-	[self.view addSubview:label];
+//	CTLabel *label = [[CTLabel alloc] initWithFrame:CGRectMake(100, 100, 100, 50)];
+//	label.text = @"姓名老司机性别年龄18+姓名老司机性别年龄18+姓名老司机性别年龄18+姓名老司机性别年龄18+姓名老司机性别年龄18+";
+//	label.numberOfLines = 2;
+//	[self.view addSubview:label];
 }
 
-
-- (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 1000;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 100;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	NormalTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"NormalTableViewCell" forIndexPath:indexPath];
+//	CoreTextTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CoreTextTableViewCell" forIndexPath:indexPath];
+	cell.content = @"contentstringByAppendingFormat:@, arc4random()contentstringByAppendingFormat:@, arc4random()contentstringByAppendingFormat:@, arc4random()contentstringByAppendingFormat:@, arc4random()";
+	return cell;
+}
 
 @end
